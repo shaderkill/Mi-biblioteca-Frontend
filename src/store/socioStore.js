@@ -17,7 +17,8 @@ export default {
   state: {
     entity: {},
     arrayEntity: [],
-    prestamos: []
+    prestamos: [],
+    multas: []
   },
   mutations: {
     // Modificar el array completo
@@ -27,6 +28,10 @@ export default {
     // Modificar el array completo
     setPrestamos: (state, response) => {
       state.prestamos = response;
+    },
+    // Modificar el array completo
+    setMultas: (state, response) => {
+      state.multas = response;
     },
     // Agregar al array
     addToArray: (state, item) => {
@@ -62,6 +67,13 @@ export default {
         id: id
       });
       commit("setPrestamos", response.prestamos);
+    },
+    async getAllMultas({ commit }, id) {
+      let response = await global.multasBySocio({
+        entity: "socios",
+        id: id
+      });
+      commit("setMultas", response.multasSocio);
     },
     // Obtener todos
     async getAll({ commit }) {

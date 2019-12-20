@@ -104,3 +104,15 @@ export function prestamosBySocio({ entity, id }) {
     else return response.data;
   });
 }
+
+/**
+ * Solicitar todos las multas según usuario
+ * @param entity as String
+ * @param id as Number
+ * @author Cristian Molina*/
+export function multasBySocio({ entity, id }) {
+  return apirest.endPoints[entity].multasBySocio({ id }).then(response => {
+    if (!response) return null;
+    else return response.data;
+  });
+}

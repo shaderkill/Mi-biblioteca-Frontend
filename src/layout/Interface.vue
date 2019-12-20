@@ -2,25 +2,26 @@
   <v-app id="inspire" :dark="isDarkMode">
     <v-bottom-navigation
       color="primary darken-1"
-      fixed
-      class="animated slideInUp faster d-sm-flex d-md-flex d-lg-none d-xl-none"
+      app
+      shift
+      class="d-sm-flex d-md-flex d-lg-none d-xl-none"
     >
-      <v-btn to="/home">
+      <v-btn to="/home" class="mb-2">
         <span>Inicio</span>
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
-      <v-btn to="/materiales/libros">
+      <v-btn to="/materiales/libros" class="mb-2">
         <span>Libros</span>
         <v-icon>mdi-book</v-icon>
       </v-btn>
 
-      <v-btn to="/materiales/proyectos">
+      <v-btn to="/materiales/proyectos" class="mb-2">
         <span>Proyectos</span>
         <v-icon>mdi-book-information-variant</v-icon>
       </v-btn>
 
-      <v-btn to="/materiales/revistas">
+      <v-btn to="/materiales/revistas" class="mb-2">
         <span>Revistas</span>
         <v-icon>mdi-book-multiple</v-icon>
       </v-btn>
@@ -28,13 +29,13 @@
       <v-menu
         top
         left
-        content-class="overflow-y-auto mb-12 mt-n12"
+        content-class="overflow-y-auto mt-n12 back"
         max-height="300"
       >
         <template v-slot:activator="{ on }">
-          <v-btn v-on="on">
-            <span>Administración</span>
-            <v-icon>mdi-toolbox</v-icon>
+          <v-btn v-on="on" class="mb-2">
+            <span>Admin</span>
+            <v-icon small>mdi-toolbox</v-icon>
           </v-btn>
         </template>
 
@@ -56,7 +57,7 @@
       v-model="drawer"
       app
       color="back darken-1"
-      class="elevation-4 d-none d-sm-none d-md-none d-xl-flex d-lg-flex"
+      class="elevation-4 d-sm-none d-md-none d-xl-flex d-lg-flex"
     >
       <v-list dense>
         <v-list-item link to="/home">

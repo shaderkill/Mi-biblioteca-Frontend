@@ -223,6 +223,14 @@ const routes = [
           )
       },
       {
+        path: "/multas",
+        name: "multas",
+        component: () =>
+          import(
+            /* webpackChunkName: "not-found" */ "../views/prestamos/multas/Multas.vue"
+          )
+      },
+      {
         path: "/not-found/404",
         name: "not-found",
         component: () =>

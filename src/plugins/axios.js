@@ -125,6 +125,9 @@ export class API {
     endpoints.prestamosBySocio = ({ id }) =>
       axios.get(`${resourceURL}/${id}/prestamos`);
 
+    endpoints.multasBySocio = ({ id }) =>
+      axios.get(`${resourceURL}/${id}/multas`);
+
     return endpoints;
   }
 }
