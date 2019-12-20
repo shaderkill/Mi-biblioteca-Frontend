@@ -7,7 +7,7 @@
         </v-btn>
       </v-row>
       <v-row>
-        <v-col>
+        <v-col cols="12" sm="12" md="4" lg="4">
           <div
             v-if="!isLoading && !item.materialBibliografico"
             class="animated fadeIn"
@@ -21,7 +21,7 @@
             <v-img :src="item.materialBibliografico.imgBiblio" contain />
           </div>
         </v-col>
-        <v-col>
+        <v-col cols="12" sm="12" md="8" lg="8">
           <div class="pa-4">
             <v-list-item>
               <v-list-item-icon>
@@ -56,9 +56,9 @@
               Lamentablemente no hemos encontrado una descripción apropiada.
             </v-card-text>
             <v-card-text>
-              Los prestamos son validos solo por 7 días.
+              Los prestamos son solo por 7 días.
             </v-card-text>
-            <v-card-actions>
+            <v-card-actions class="pt-12">
               <v-btn
                 rounded
                 absolute

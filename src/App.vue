@@ -6,8 +6,23 @@
 export default {
   name: "App",
   data: () => ({
-    //
-  })
+    window: {
+      width: 0,
+      height: 0
+    }
+  }),
+  created() {
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+  methods: {
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    }
+  }
 };
 </script>
 

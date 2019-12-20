@@ -1,12 +1,5 @@
 <template>
-  <v-card
-    :loading="isLoading"
-    loader-height="15"
-    min-height="400"
-    min-width="380"
-    max-width="380"
-    class="animated fadeInUp"
-  >
+  <v-card :loading="isLoading" loader-height="15" class="animated fadeInUp">
     <div
       v-if="!isLoading && !book.materialBibliografico"
       class="animated fadeIn"
@@ -49,13 +42,8 @@
         <v-divider class="my-4" />
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn
-            rounded
-            outlined
-            color="primary"
-            :to="`/materiales/libros/${book.id}`"
-          >
-            Ver más
+          <v-btn rounded color="primary" :to="`/materiales/libros/${book.id}`">
+            Ver más <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
         </v-card-actions>
       </div>
@@ -68,13 +56,32 @@ export default {
   name: "cardBook",
   props: ["book"],
   data: () => ({
-    isLoading: true
+    isLoading: true,
+    window: {
+      width: 0,
+      height: 0
+    }
   }),
+  created() {
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+  methods: {
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    }
+  },
 
   mounted() {
     setTimeout(() => (this.isLoading = false), 2000);
   }
 };
+
+//:min-width="window.width < 1000 ? 410 : 415"
+//:max-width="window.width < 1000 ? window.width * 0.94 : 415"
 </script>
 
 <style></style>

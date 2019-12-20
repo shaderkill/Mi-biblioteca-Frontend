@@ -96,20 +96,18 @@
         </v-btn>
       </v-card-title>
 
-      <v-layout wrap align-center justify-center v-if="libros.length > 0">
-        <v-row>
-          <v-col
-            v-for="(libro, i) in libros"
-            :key="i"
-            cols="12"
-            sm="12"
-            md="6"
-            lg="6"
-          >
-            <cardBook :book.sync="libro" v-if="i < 4" />
-          </v-col>
-        </v-row>
-      </v-layout>
+      <v-row v-if="libros.length > 0">
+        <v-col
+          v-for="(libro, i) in libros"
+          :key="i"
+          cols="12"
+          sm="12"
+          md="6"
+          lg="4"
+        >
+          <cardBook :book.sync="libro" v-if="i < 3" />
+        </v-col>
+      </v-row>
 
       <v-alert
         class="body-2 white--text text-center py-8"
@@ -127,20 +125,18 @@
         </v-btn>
       </v-card-title>
 
-      <v-layout wrap align-center justify-center v-if="proyectos.length > 0">
-        <v-row>
-          <v-col
-            v-for="(proyecto, i) in proyectos"
-            :key="i"
-            cols="12"
-            sm="12"
-            md="6"
-            lg="6"
-          >
-            <cardProyecto :proyecto.sync="proyecto" v-if="i < 4" />
-          </v-col>
-        </v-row>
-      </v-layout>
+      <v-row v-if="proyectos.length > 0">
+        <v-col
+          v-for="(proyecto, i) in proyectos"
+          :key="i"
+          cols="12"
+          sm="12"
+          md="6"
+          lg="4"
+        >
+          <cardProyecto :proyecto.sync="proyecto" v-if="i < 3" />
+        </v-col>
+      </v-row>
 
       <v-alert
         class="body-2 white--text text-center py-8"
@@ -158,20 +154,18 @@
         </v-btn>
       </v-card-title>
 
-      <v-layout wrap align-center justify-center v-if="revistas.length > 0">
-        <v-row>
-          <v-col
-            v-for="(revista, i) in revistas"
-            :key="i"
-            cols="12"
-            sm="12"
-            md="6"
-            lg="6"
-          >
-            <cardRevista :revista.sync="revista" v-if="i < 4" />
-          </v-col>
-        </v-row>
-      </v-layout>
+      <v-row v-if="revistas.length > 0">
+        <v-col
+          v-for="(revista, i) in revistas"
+          :key="i"
+          cols="12"
+          sm="12"
+          md="6"
+          lg="4"
+        >
+          <cardRevista :revista.sync="revista" v-if="i < 3" />
+        </v-col>
+      </v-row>
 
       <v-alert
         class="body-2 white--text text-center py-8"
