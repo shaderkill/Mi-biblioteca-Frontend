@@ -3,7 +3,6 @@
     :loading="isLoading"
     loader-height="15"
     min-height="400"
-    min-width="380"
     class="animated fadeInUp"
   >
     <div

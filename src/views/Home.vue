@@ -1,6 +1,6 @@
 <template>
-  <div class="background-complete">
-    <v-container fluid class="pt-12">
+  <div class="background-complete pb-12">
+    <v-container fluid class="pt-12 pb-12">
       <v-card flat color="transparent" class="px-6">
         <div class="display-1 white--text">Inicio</div>
         <v-menu bottom right max-width="400">
@@ -104,9 +104,9 @@
             cols="12"
             sm="12"
             md="6"
-            lg="4"
+            lg="6"
           >
-            <cardBook :book.sync="libro" v-if="i < 3" />
+            <cardBook :book.sync="libro" v-if="i < 4" />
           </v-col>
         </v-row>
       </v-layout>
@@ -135,9 +135,9 @@
             cols="12"
             sm="12"
             md="6"
-            lg="4"
+            lg="6"
           >
-            <cardProyecto :proyecto.sync="proyecto" v-if="i < 3" />
+            <cardProyecto :proyecto.sync="proyecto" v-if="i < 4" />
           </v-col>
         </v-row>
       </v-layout>
@@ -166,9 +166,9 @@
             cols="12"
             sm="12"
             md="6"
-            lg="4"
+            lg="6"
           >
-            <cardRevista :revista.sync="revista" v-if="i < 3" />
+            <cardRevista :revista.sync="revista" v-if="i < 4" />
           </v-col>
         </v-row>
       </v-layout>
@@ -184,15 +184,15 @@
       <v-divider class="my-12" />
 
       <div class="title">Informaciones utiles</div>
-      <v-row class="my-6">
+      <v-row class="my-6" justify="center" align="stretch">
         <v-col cols="12" sm="12" md="6">
-          <v-card class="pa-6" color="primary">
+          <v-card class="pa-6" color="primary" dark>
             <v-card-title>
               <v-chip color="info">Información</v-chip>
             </v-card-title>
             <v-card-text>
               <v-row>
-                <v-col cols="12" sm="12" md="8" lg="8">
+                <v-col cols="12" sm="12" md="12" lg="12">
                   <v-card-title>
                     Revisa tus préstamos vigentes
                   </v-card-title>
@@ -202,8 +202,13 @@
                     solicitado hasta la fecha.
                   </v-card-text>
                 </v-col>
-                <v-col cols="12" sm="12" md="4" lg="4">
-                  <v-img contain src="@/assets/booking.svg" class="mt-8" />
+                <v-col cols="12" sm="12" md="12" lg="12">
+                  <v-img
+                    contain
+                    src="@/assets/booking.svg"
+                    class="mt-8"
+                    height="200"
+                  />
                 </v-col>
               </v-row>
             </v-card-text>
@@ -212,6 +217,43 @@
               <v-spacer />
               <v-btn rounded to="/prestamos">
                 Ver mis préstamos
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+        <v-col cols="12" sm="12" md="6">
+          <v-card class="pa-6" color="error" dark>
+            <v-card-title>
+              <v-chip color="warning">Información</v-chip>
+            </v-card-title>
+            <v-card-text>
+              <v-row>
+                <v-col cols="12" sm="12" md="12" lg="12">
+                  <v-card-title>
+                    ¿Has olvidado devolver un libro?
+                  </v-card-title>
+                  <v-card-text>
+                    Si has olvidado entregar un libro dentro de plazo, pueden
+                    que te hayan multado para confirmarlo solo debes ingresar
+                    aqui, en caso de tener que pagar solo ve a la biblioteca y
+                    cancela tu multa.
+                  </v-card-text>
+                </v-col>
+                <v-col cols="12" sm="12" md="12" lg="12">
+                  <v-img
+                    contain
+                    src="@/assets/forgot.svg"
+                    class="mt-8"
+                    height="200"
+                  />
+                </v-col>
+              </v-row>
+            </v-card-text>
+            <v-divider />
+            <v-card-actions class="pt-6">
+              <v-spacer />
+              <v-btn rounded to="/multas">
+                Ver multas vigentes
               </v-btn>
             </v-card-actions>
           </v-card>

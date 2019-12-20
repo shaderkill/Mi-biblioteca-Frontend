@@ -152,6 +152,20 @@ const routes = [
           )
       },
       {
+        path: "/admin/socio",
+        component: () =>
+          import(
+            /* webpackChunkName: "mantenedor_socio" */ "../views/mantedores/socio/Socios.vue"
+          )
+      },
+      {
+        path: "/admin/socio/form/:id?",
+        component: () =>
+          import(
+            /* webpackChunkName: "mantenedor_socio" */ "../views/mantedores/socio/formulario/Form.vue"
+          )
+      },
+      {
         path: "/materiales/libros",
         component: () =>
           import(
@@ -198,6 +212,14 @@ const routes = [
         component: () =>
           import(
             /* webpackChunkName: "mis_datos" */ "../views/datosUsuario/DatosUsuario.vue"
+          )
+      },
+      {
+        path: "/prestamos",
+        name: "prestamos",
+        component: () =>
+          import(
+            /* webpackChunkName: "not-found" */ "../views/prestamos/prestamos/Prestamos.vue"
           )
       },
       {

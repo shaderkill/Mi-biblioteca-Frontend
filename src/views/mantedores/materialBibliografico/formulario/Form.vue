@@ -29,6 +29,15 @@
                   v-model="item.categoria"
                 />
               </v-col>
+              <v-col cols="12" sm="12" md="6" lg="6">
+                <v-textarea
+                  filled
+                  rounded
+                  label="Descripcion"
+                  :rules="textFieldRules"
+                  v-model="item.descripcion"
+                />
+              </v-col>
               <v-col cols="12" sm="12" md="6" lg="6" v-if="!item.id">
                 <div class="body-1 pa-4">
                   <div>Fecha de publicación</div>
@@ -77,6 +86,7 @@ export default {
     defaultItem: {
       id: null,
       titulo: "",
+      descripcion: "",
       categoria: {},
       fechaPublicacion: null,
       imgBiblio: ""
@@ -134,8 +144,6 @@ export default {
       }, 3000);
     },
     async updateIMG() {
-      // eslint-disable-next-line no-console
-      console.log(this.imgBiblio);
       if (this.imgBiblio) {
         if (this.imgBiblio.size > 20000)
           return this.$toasted.error(

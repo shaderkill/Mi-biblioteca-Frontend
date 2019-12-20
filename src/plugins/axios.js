@@ -119,6 +119,12 @@ export class API {
       return axios.post(`${resourceURL}/${id}/upload`, formData);
     };
 
+    endpoints.solicitar = ({ idUser, idBook }) =>
+      axios.post(`${resourceURL}?socioId=${idUser}&materialId=${idBook}`);
+
+    endpoints.prestamosBySocio = ({ id }) =>
+      axios.get(`${resourceURL}/${id}/prestamos`);
+
     return endpoints;
   }
 }

@@ -4,36 +4,36 @@
       rounded
       filled
       append-icon="mdi-magnify"
-      label="Buscar una revista por nombre"
+      label="Buscar un prestamo por nombre del material bibliográfico"
       class="px-lg-12 my-8"
     />
-    <v-row align="center" justify="center" v-if="revistas.length === 0">
+    <v-row align="center" justify="center" v-if="prestamos.length === 0">
       <span class="title px-6">
-        Ups... No nos quedan revistas disponibles, vuelve más tarde...
+        Ups... No has solicitado ningún prestamo
       </span>
       <v-img src="@/assets/notFound.svg" height="400" class="ma-12" contain />
     </v-row>
-    <div v-if="revistas.length > 0 && !revistasSearched.length > 0">
-      <div class="title pa-8">revistas recomendadas</div>
+    <div v-if="prestamos.length > 0 && !prestamoSearched.length > 0">
+      <div class="title pa-8">Tus prestamos vigentes</div>
       <v-row align="center" justify="center">
         <v-col
-          v-for="(revista, i) in revistas"
+          v-for="(prestamo, i) in prestamos"
           :key="i"
           cols="12"
           sm="6"
-          md="6"
-          lg="6"
+          md="4"
+          lg="4"
           class="my-4"
         >
-          <vBooks :book.sync="revista" />
+          <vPrestamos :item.sync="prestamo" />
         </v-col>
       </v-row>
     </div>
-    <div v-if="revistasSearched.length > 0 && search.length > 0">
+    <div v-if="prestamoSearched.length > 0 && search.length > 0">
       <div class="title pa-8">Resultados de tu busqueda: {{ search }}</div>
       <v-row align="center" justify="center">
         <v-col
-          v-for="(revista, i) in revistasSearched"
+          v-for="(prestamo, i) in prestamoSearched"
           :key="i"
           cols="12"
           sm="6"
@@ -41,7 +41,7 @@
           lg="4"
           class="my-4"
         >
-          <vBooks :book.sync="revista" />
+          <vPrestamos :item.sync="prestamo" />
         </v-col>
       </v-row>
     </div>
@@ -50,35 +50,34 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import revistaStore from "@/store/revistaStore";
+import socioStore from "@/store/socioStore";
 export default {
-  name: "revistas",
+  name: "socios",
   components: {
-    vBooks: () => import("@/components/shared/CardBook")
+    vPrestamos: () => import("@/components/shared/CardPrestamos")
   },
   data: () => ({
-    revistas: [],
+    prestamos: [],
     search: "",
-    revistasSearched: []
+    prestamoSearched: []
   }),
   async mounted() {
-    this.$store.registerModule("revistaStore", revistaStore);
-    await this.revistasGetAll();
-    this.revistas = this.arrayrevistas;
+    this.$store.registerModule("socioStore", socioStore);
+    await this.sociosGetAll(this.$store.state.accessID);
+    this.prestamos = this.arrayPrestamos;
   },
   beforeDestroy() {
-    this.$store.unregisterModule("revistaStore");
+    this.$store.unregisterModule("socioStore");
   },
   computed: {
-    ...mapState("revistaStore", { arrayrevistas: "arrayEntity" })
+    ...mapState("socioStore", { arrayPrestamos: "prestamos" })
   },
   methods: {
-    ...mapActions("revistaStore", {
-      revistasGetAll: "getAll",
-      revistaGetByID: "getByID"
+    ...mapActions("socioStore", {
+      sociosGetAll: "getAllPrestamos"
     }),
     filterArray(value) {
-      this.revistasSearched = this.arrayrevistas.map(
+      this.prestamoSearched = this.arrayPrestamos.map(
         element => (element.materialBibliografico.titulo = value)
       );
     }

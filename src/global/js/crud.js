@@ -78,3 +78,29 @@ export function uploadImg({ entity, dataForm }) {
     else return response.data;
   });
 }
+
+/**
+ * Solicitar un prestamo de material bibliográfico
+ * @param entity as String
+ * @param id as Number
+ * @author Cristian Molina*/
+export function solicitar({ entity, idUser, idBook }) {
+  return apirest.endPoints[entity]
+    .solicitar({ idUser, idBook })
+    .then(response => {
+      if (!response) return null;
+      else return response.data;
+    });
+}
+
+/**
+ * Solicitar todos los prestamos según usuario
+ * @param entity as String
+ * @param id as Number
+ * @author Cristian Molina*/
+export function prestamosBySocio({ entity, id }) {
+  return apirest.endPoints[entity].prestamosBySocio({ id }).then(response => {
+    if (!response) return null;
+    else return response.data;
+  });
+}

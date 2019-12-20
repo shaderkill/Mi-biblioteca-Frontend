@@ -254,6 +254,10 @@ export default {
       {
         text: "Prestamos",
         url: "/admin/prestamo"
+      },
+      {
+        text: "Socios",
+        url: "/admin/socio"
       }
     ]
   }),

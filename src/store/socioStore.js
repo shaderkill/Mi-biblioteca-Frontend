@@ -16,12 +16,17 @@ export default {
   namespaced: true,
   state: {
     entity: {},
-    arrayEntity: []
+    arrayEntity: [],
+    prestamos: []
   },
   mutations: {
     // Modificar el array completo
     setArray: (state, response) => {
       state.arrayEntity = response;
+    },
+    // Modificar el array completo
+    setPrestamos: (state, response) => {
+      state.prestamos = response;
     },
     // Agregar al array
     addToArray: (state, item) => {
@@ -49,6 +54,14 @@ export default {
   actions: {
     clearEntity({ commit }) {
       commit("clearEntity");
+    },
+    // Obtener todos los prestamos
+    async getAllPrestamos({ commit }, id) {
+      let response = await global.prestamosBySocio({
+        entity: "socios",
+        id: id
+      });
+      commit("setPrestamos", response.prestamos);
     },
     // Obtener todos
     async getAll({ commit }) {

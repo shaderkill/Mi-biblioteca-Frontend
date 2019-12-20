@@ -8,24 +8,41 @@
         <v-form>
           <v-card-text>
             <v-row>
-              <v-col cols="12" sm="12" md="6" lg="6">
-                <v-select
-                  filled
-                  rounded
-                  label="Material Bibliográfico"
-                  :items="listmaterialBibliograficos"
-                  :rules="selectFieldRules"
-                  v-model="item.materialBibliografico"
-                />
+              <v-col cols="12" sm="12" md="12" lg="12">
+                <div class="body-1 pa-4">
+                  <div>Fecha de prestamo</div>
+                  <v-date-picker
+                    v-model="item.fechaPrestamo"
+                    show-current
+                    color="primary"
+                    landscape
+                    year-icon="mdi-calendar"
+                  />
+                </div>
               </v-col>
-              <v-col cols="12" sm="12" md="6" lg="6">
-                <v-text-field
-                  filled
-                  rounded
-                  label="Autor"
-                  :rules="textFieldRules"
-                  v-model="item.autor"
-                />
+              <v-col cols="12" sm="12" md="12" lg="12">
+                <div class="body-1 pa-4">
+                  <div>Fecha de vencimiento</div>
+                  <v-date-picker
+                    v-model="item.fechaVencimiento"
+                    show-current
+                    color="primary"
+                    landscape
+                    year-icon="mdi-calendar"
+                  />
+                </div>
+              </v-col>
+              <v-col cols="12" sm="12" md="12" lg="12">
+                <div class="body-1 pa-4">
+                  <div>Fecha de entrega</div>
+                  <v-date-picker
+                    v-model="item.fechaEntrega"
+                    show-current
+                    color="primary"
+                    landscape
+                    year-icon="mdi-calendar"
+                  />
+                </div>
               </v-col>
             </v-row>
           </v-card-text>
@@ -52,20 +69,13 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import proyectoStore from "@/store/proyectoStore";
-import materialBibliograficoStore from "@/store/materialBibliograficoStore";
+import prestamoStore from "@/store/prestamoStore";
 
 export default {
   name: "Formulario",
 
   data: () => ({
     item: null,
-    defaultItem: {
-      id: null,
-      autor: "",
-      materialBibliografico: {}
-    },
-    listmaterialBibliograficos: [],
     isLoading: true,
     textFieldRules: [v => !!v || "Debe ingresar el valor solicitado."],
     selectFieldRules: [v => !!v || "Debe seleccionar el valor solicitado."],
@@ -77,37 +87,44 @@ export default {
   }),
 
   methods: {
-    ...mapActions("proyectoStore", {
-      proyectoGetByID: "getByID",
-      proyectoUpdate: "updateEntity",
-      proyectoCreate: "saveEntity"
-    }),
-    ...mapActions("materialBibliograficoStore", {
-      materialBibliograficosGetAll: "getAll"
+    ...mapActions("prestamoStore", {
+      prestamoGetByID: "getByID",
+      prestamoUpdate: "updateEntity",
+      prestamoCreate: "saveEntity"
     }),
     goBack() {
       this.$router.go(-1);
     },
     async sendItem() {
       for (let key in this.item) {
-        if (!this.item[key] && key !== "id" && key !== "idMaterial")
+        if (
+          !this.item[key] &&
+          key !== "id" &&
+          key !== "prestamo" &&
+          key !== "fechaEntrega"
+        )
           return this.$toasted.error("No pueden haber campos vacios.", {
             icon: "mdi-alert"
           });
       }
-      await this.proyectoCreate(this.item);
+      await this.prestamoCreate(this.item);
       setTimeout(() => {
         this.$router.go(-1);
       }, 3000);
     },
     async updateItem() {
       for (let key in this.item) {
-        if (!this.item[key] && key !== "id" && key !== "idMaterial")
+        if (
+          !this.item[key] &&
+          key !== "id" &&
+          key !== "prestamo" &&
+          key !== "fechaEntrega"
+        )
           return this.$toasted.error("No pueden haber campos vacios.", {
             icon: "mdi-alert"
           });
       }
-      await this.proyectoUpdate(this.item);
+      await this.prestamoUpdate(this.item);
       setTimeout(() => {
         this.$router.go(-1);
       }, 3000);
@@ -115,32 +132,27 @@ export default {
   },
 
   computed: {
-    ...mapState("proyectoStore", ["entity"]),
-    ...mapState("materialBibliograficoStore", {
-      materialBibliograficos: "arrayEntity"
-    })
+    ...mapState("prestamoStore", ["entity"])
   },
 
-  async mounted() {
+  async beforeMount() {
     try {
       this.isLoading = true;
-      await this.$store.registerModule("proyectoStore", proyectoStore);
-      await this.$store.registerModule(
-        "materialBibliograficoStore",
-        materialBibliograficoStore
-      );
+      await this.$store.registerModule("prestamoStore", prestamoStore);
       let id = this.$route.params.id;
       if (id) {
-        await this.proyectoGetByID(id);
+        await this.prestamoGetByID(id);
         this.item = this.entity;
-      } else this.item = this.defaultItem;
-      await this.materialBibliograficosGetAll();
-      await this.materialBibliograficos.forEach(element => {
-        this.listmaterialBibliograficos.push({
-          text: element.titulo,
-          value: element
-        });
-      });
+        this.item.fechaEntrega = this.item.fechaEntrega
+          ? this.item.fechaEntrega.substring(0, 10)
+          : null;
+        this.item.fechaPrestamo = this.item.fechaPrestamo
+          ? this.item.fechaPrestamo.substring(0, 10)
+          : null;
+        this.item.fechaVencimiento = this.item.fechaVencimiento
+          ? this.item.fechaVencimiento.substring(0, 10)
+          : null;
+      }
     } catch (error) {
       this.$toasted.error("No han podido ser cargado los datos necesarios.", {
         icon: "mdi-alert"
@@ -151,8 +163,7 @@ export default {
   },
 
   beforeDestroy() {
-    this.$store.unregisterModule("proyectoStore");
-    this.$store.unregisterModule("materialBibliograficoStore");
+    this.$store.unregisterModule("prestamoStore");
   }
 };
 </script>

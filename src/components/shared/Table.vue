@@ -85,6 +85,25 @@
         <span>{{ item.fechaPublicacion | formatDate }}</span>
       </template>
 
+      <template v-slot:item.fechaPrestamo="{ item }">
+        <span>{{ item.fechaPrestamo | formatDate }}</span>
+      </template>
+
+      <template v-slot:item.fechaVencimiento="{ item }">
+        <span>{{ item.fechaVencimiento | formatDate }}</span>
+      </template>
+
+      <template v-slot:item.fechaEntrega="{ item }">
+        <v-chip
+          v-if="item.fechaEntrega"
+          :color="
+            item.fechaEntrega > item.fechaVencimiento ? 'error' : 'success'
+          "
+        >
+          <span>{{ item.fechaEntrega | formatDate }}</span>
+        </v-chip>
+      </template>
+
       <template v-slot:item.imgBiblio="{ item }">
         <v-card
           class="pa-1 ma-1"
@@ -93,6 +112,12 @@
           @click="editIMG(item)"
         >
           <v-img :src="item.imgBiblio" contain height="100" width="100" />
+        </v-card>
+      </template>
+
+      <template v-slot:item.imgAvatar="{ item }">
+        <v-card class="pa-1 ma-1" color="#22222222" width="100">
+          <v-img :src="item.imgAvatar" contain height="100" width="100" />
         </v-card>
       </template>
 
