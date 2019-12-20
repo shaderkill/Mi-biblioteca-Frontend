@@ -1,7 +1,6 @@
-import bibliotecaStore from '@/store/bibliotecaStore';
 <template>
   <v-container>
-    <v-card-title>Bibliotecas</v-card-title>
+    <v-card-title>Ciudades</v-card-title>
     <vTable
       :headers.sync="headers"
       :items.sync="items"

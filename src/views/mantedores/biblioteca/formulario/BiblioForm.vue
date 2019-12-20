@@ -105,7 +105,9 @@ export default {
           });
       }
       await this.bibliotecaCreate(this.item);
-      this.$router.go(-1);
+      setTimeout(() => {
+        this.$router.go(-1);
+      }, 3000);
     },
     async updateItem() {
       for (let key in this.item) {
@@ -115,7 +117,9 @@ export default {
           });
       }
       await this.bibliotecaUpdate(this.item);
-      this.$router.go(-1);
+      setTimeout(() => {
+        this.$router.go(-1);
+      }, 3000);
     }
   },
 

@@ -7,16 +7,16 @@
     class="animated fadeInUp"
   >
     <div
-      v-if="!isLoading && !book.materialBibliografico"
+      v-if="!isLoading && !proyecto.materialBibliografico"
       class="animated fadeIn"
     >
       <v-img src="../../assets/notIMG.png" contain />
     </div>
     <div
-      v-if="!isLoading && book.materialBibliografico"
+      v-if="!isLoading && proyecto.materialBibliografico"
       class="animated fadeIn"
     >
-      <v-img :src="book.materialBibliografico.imgBiblio" height="300" />
+      <v-img :src="proyecto.materialBibliografico.imgBiblio" height="300" />
       <div class="pa-4">
         <v-list-item>
           <v-list-item-icon>
@@ -24,23 +24,28 @@
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title class="headline"
-              >{{ book.materialBibliografico.titulo }}
+              >{{ proyecto.materialBibliografico.titulo }}
             </v-list-item-title>
-            <v-list-item-subtitle> por {{ book.autor }} </v-list-item-subtitle>
+            <v-list-item-subtitle>
+              por {{ proyecto.autor }}
+            </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
         <v-card-subtitle>
           <b>Categoría:</b>
-          {{ book.materialBibliografico.categoria.categoria }}
+          {{ proyecto.materialBibliografico.categoria.categoria }}
         </v-card-subtitle>
-        <v-card-text class="px-4" v-if="book.materialBibliografico.descripcion">
+        <v-card-text
+          class="px-4"
+          v-if="proyecto.materialBibliografico.descripcion"
+        >
           <b>Descripción</b><br />
-          {{ book.materialBibliografico.descripcion }}
+          {{ proyecto.materialBibliografico.descripcion }}
         </v-card-text>
         <v-card-text
           class="px-4"
-          v-if="!book.materialBibliografico.descripcion"
+          v-if="!proyecto.materialBibliografico.descripcion"
         >
           <b>Descripción</b><br />
           Lamentablemente no hemos encontrado una descripción apropiada.
@@ -52,7 +57,7 @@
             rounded
             outlined
             color="primary"
-            :to="`/materiales/libros/${book.id}`"
+            :to="`/materiales/proyectos/${proyecto.id}`"
           >
             Ver más
           </v-btn>
@@ -64,8 +69,8 @@
 
 <script>
 export default {
-  name: "cardBook",
-  props: ["book"],
+  name: "cardproyecto",
+  props: ["proyecto"],
   data: () => ({
     isLoading: true
   }),

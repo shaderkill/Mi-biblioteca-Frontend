@@ -3,7 +3,7 @@
     <v-card class="px-4 pb-4" :loading="isLoading">
       <div v-if="item">
         <v-card-title>{{
-          item.id ? "Actualizando un proyecto" : "Ingresando un nuevo proyecto"
+          item.id ? "Actualizando un prestamo" : "Ingresando un nuevo prestamo"
         }}</v-card-title>
         <v-form>
           <v-card-text>
@@ -96,7 +96,9 @@ export default {
           });
       }
       await this.proyectoCreate(this.item);
-      this.$router.go(-1);
+      setTimeout(() => {
+        this.$router.go(-1);
+      }, 3000);
     },
     async updateItem() {
       for (let key in this.item) {
@@ -106,7 +108,9 @@ export default {
           });
       }
       await this.proyectoUpdate(this.item);
-      this.$router.go(-1);
+      setTimeout(() => {
+        this.$router.go(-1);
+      }, 3000);
     }
   },
 

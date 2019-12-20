@@ -1,13 +1,14 @@
 <template>
-  <v-container>
+  <v-container fluid class="pb-12">
     <v-text-field
       rounded
       filled
       append-icon="mdi-magnify"
-      label="Buscar revista por nombre"
+      label="Buscar una revista por nombre"
+      class="px-lg-12 my-8"
     />
     <v-row align="center" justify="center" v-if="revistas.length === 0">
-      <span class="title">
+      <span class="title px-6">
         Ups... No nos quedan revistas disponibles, vuelve más tarde...
       </span>
       <v-img src="@/assets/notFound.svg" height="400" class="ma-12" contain />

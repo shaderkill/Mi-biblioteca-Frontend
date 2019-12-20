@@ -3,9 +3,7 @@
     <v-card class="px-4 pb-4" :loading="isLoading">
       <div v-if="item">
         <v-card-title>{{
-          item.id
-            ? "Actualizando un Material Bibliográfico"
-            : "Ingresando un nuevo Material Bibliográfico"
+          item.id ? "Actualizando un libro" : "Ingresando un nuevo libro"
         }}</v-card-title>
         <v-form>
           <v-card-text>
@@ -118,7 +116,9 @@ export default {
           });
       }
       await this.libroCreate(this.item);
-      this.$router.go(-1);
+      setTimeout(() => {
+        this.$router.go(-1);
+      }, 3000);
     },
     async updateItem() {
       for (let key in this.item) {
@@ -128,7 +128,9 @@ export default {
           });
       }
       await this.libroUpdate(this.item);
-      this.$router.go(-1);
+      setTimeout(() => {
+        this.$router.go(-1);
+      }, 3000);
     }
   },
 

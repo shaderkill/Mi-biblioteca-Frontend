@@ -1,13 +1,14 @@
 <template>
-  <v-container>
+  <v-container fluid class="pb-12">
     <v-text-field
       rounded
       filled
       append-icon="mdi-magnify"
-      label="Buscar Libro por nombre"
+      label="Buscar un libro por nombre"
+      class="px-lg-12 my-8"
     />
     <v-row align="center" justify="center" v-if="libros.length === 0">
-      <span class="title">
+      <span class="title px-6">
         Ups... No nos quedan libros disponibles, vuelve más tarde...
       </span>
       <v-img src="@/assets/notFound.svg" height="400" class="ma-12" contain />

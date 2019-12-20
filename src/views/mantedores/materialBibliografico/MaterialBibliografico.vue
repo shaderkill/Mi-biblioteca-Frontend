@@ -64,7 +64,7 @@ export default {
         this.items.forEach(item => {
           for (let value in item) {
             if (typeof item[value] === "object")
-              item[value] = item[value] ? item[value].nombre : null;
+              item[value] = item[value] ? item[value].categoria : null;
           }
         });
         this.getHeaders();

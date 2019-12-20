@@ -1,10 +1,62 @@
 <template>
   <v-app id="inspire" :dark="isDarkMode">
+    <v-bottom-navigation
+      color="primary darken-1"
+      fixed
+      class="animated slideInUp faster d-sm-flex d-md-flex d-lg-none d-xl-none"
+    >
+      <v-btn to="/home">
+        <span>Inicio</span>
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+
+      <v-btn to="/materiales/libros">
+        <span>Libros</span>
+        <v-icon>mdi-book</v-icon>
+      </v-btn>
+
+      <v-btn to="/materiales/proyectos">
+        <span>Proyectos</span>
+        <v-icon>mdi-book-information-variant</v-icon>
+      </v-btn>
+
+      <v-btn to="/materiales/revistas">
+        <span>Revistas</span>
+        <v-icon>mdi-book-multiple</v-icon>
+      </v-btn>
+
+      <v-menu
+        top
+        left
+        content-class="overflow-y-auto mb-12 mt-n12"
+        max-height="300"
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on">
+            <span>Administración</span>
+            <v-icon>mdi-toolbox</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list-item
+          v-for="(item, i) in linkAdmin"
+          :key="i"
+          :to="item.url"
+          class="back"
+        >
+          <v-list-item-title>{{ item.text }}</v-list-item-title>
+          <v-list-item-action>
+            <v-icon>mdi-table</v-icon>
+          </v-list-item-action>
+        </v-list-item>
+      </v-menu>
+    </v-bottom-navigation>
+
     <v-navigation-drawer
       v-model="drawer"
       app
       color="back darken-1"
-      class="elevation-4"
+      class="elevation-4 d-none d-sm-none d-md-none d-xl-flex d-lg-flex"
     >
       <v-list dense>
         <v-list-item link to="/home">
@@ -65,10 +117,11 @@
       </template>
     </v-navigation-drawer>
 
-    <v-app-bar app color="back" elevate-on-scroll>
-      <v-icon @click.stop="drawer = !drawer">
+    <v-app-bar app color="primary darken-1" dark elevate-on-scroll>
+      <v-icon @click.stop="drawer = !drawer" class="d-none d-md-flex d-lg-flex">
         {{ drawer ? "mdi-chevron-left" : "mdi-menu" }}
       </v-icon>
+      <span class="mx-2">Mi biblioteca</span>
       <v-spacer />
       <v-toolbar-items class="align-center">
         <v-menu
@@ -78,7 +131,10 @@
           :close-on-content-click="false"
         >
           <template v-slot:activator="{ on }">
-            <v-chip color="primary" small class="ma-2" v-on="on" />
+            <v-chip class="px-2" color="#22222222" v-on="on">
+              <v-icon>mdi-format-paint</v-icon>
+              <v-chip color="primary" small class="ma-2" />
+            </v-chip>
           </template>
           <v-color-picker
             v-model="primaryColor"
@@ -95,7 +151,7 @@
             <v-checkbox
               v-on="on"
               class="ma-2 mt-8"
-              color="primary"
+              color="grey darken-3"
               on-icon="mdi-brightness-4"
               off-icon="mdi-brightness-7"
               v-model="isDarkMode"
@@ -133,8 +189,8 @@
 
     <v-content>
       <transition
-        enter-active-class="animated fadeInRight abs delay-1s fast"
-        leave-active-class="animated fadeOutLeft abs fast"
+        enter-active-class="animated fadeInRight abs delay-1s faster"
+        leave-active-class="animated fadeOutLeft abs faster"
       >
         <router-view></router-view>
       </transition>

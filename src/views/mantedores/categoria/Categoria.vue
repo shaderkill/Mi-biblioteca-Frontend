@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card-title>Materiales Bibliográficos</v-card-title>
+    <v-card-title>Categorías</v-card-title>
     <vTable
       :headers.sync="headers"
       :items.sync="items"

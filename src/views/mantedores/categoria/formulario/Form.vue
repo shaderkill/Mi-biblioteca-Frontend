@@ -4,8 +4,8 @@
       <div v-if="item">
         <v-card-title>{{
           item.id
-            ? "Actualizando un Material Bibliográfico"
-            : "Ingresando un nuevo Material Bibliográfico"
+            ? "Actualizando una categoría"
+            : "Ingresando una nueva categoría"
         }}</v-card-title>
         <v-form>
           <v-card-text>
@@ -83,7 +83,7 @@ export default {
       await this.categoriaCreate(this.item);
       setTimeout(() => {
         this.$router.push("/admin/categoria");
-      }, 1000);
+      }, 3000);
     },
     async updateItem() {
       for (let key in this.item) {
@@ -95,7 +95,7 @@ export default {
       await this.categoriaUpdate(this.item);
       setTimeout(() => {
         this.$router.push("/admin/categoria");
-      }, 1000);
+      }, 3000);
     }
   },
 
