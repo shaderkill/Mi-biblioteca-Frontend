@@ -104,6 +104,7 @@
           sm="12"
           md="6"
           lg="4"
+          class="d-flex align-stretch"
         >
           <cardBook :book.sync="libro" v-if="i < 3" />
         </v-col>
@@ -133,6 +134,7 @@
           sm="12"
           md="6"
           lg="4"
+          class="d-flex align-stretch"
         >
           <cardProyecto :proyecto.sync="proyecto" v-if="i < 3" />
         </v-col>
@@ -162,6 +164,7 @@
           sm="12"
           md="6"
           lg="4"
+          class="d-flex align-stretch"
         >
           <cardRevista :revista.sync="revista" v-if="i < 3" />
         </v-col>

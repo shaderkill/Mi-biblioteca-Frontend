@@ -1,12 +1,5 @@
 <template>
-  <v-card
-    :loading="isLoading"
-    loader-height="15"
-    min-height="400"
-    min-width="380"
-    max-width="380"
-    class="animated fadeInUp"
-  >
+  <v-card :loading="isLoading" loader-height="15" class="animated fadeInUp">
     <div
       v-if="!isLoading && !revista.materialBibliografico"
       class="animated fadeIn"
@@ -42,7 +35,9 @@
           v-if="revista.materialBibliografico.descripcion"
         >
           <b>Descripción</b><br />
-          {{ revista.materialBibliografico.descripcion }}
+          {{
+            revista.materialBibliografico.descripcion.substring(0, 200) + "..."
+          }}
         </v-card-text>
         <v-card-text
           class="px-4"
@@ -56,7 +51,6 @@
           <v-spacer></v-spacer>
           <v-btn
             rounded
-            outlined
             color="primary"
             :to="`/materiales/revistas/${revista.id}`"
           >

@@ -26,7 +26,7 @@
           lg="6"
           class="my-4"
         >
-          <vBooks :book.sync="proyecto" />
+          <vBooks :proyecto.sync="proyecto" />
         </v-col>
       </v-row>
     </div>
@@ -42,7 +42,7 @@
           lg="4"
           class="my-4"
         >
-          <vBooks :book.sync="proyecto" />
+          <vBooks :proyecto.sync="proyecto" />
         </v-col>
       </v-row>
     </div>
@@ -55,7 +55,7 @@ import proyectoStore from "@/store/proyectoStore";
 export default {
   name: "proyectos",
   components: {
-    vBooks: () => import("@/components/shared/CardBook")
+    vBooks: () => import("@/components/shared/CardProyecto.vue")
   },
   data: () => ({
     proyectos: [],

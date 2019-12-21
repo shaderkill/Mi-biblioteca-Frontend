@@ -30,7 +30,7 @@
         </v-card-subtitle>
         <v-card-text class="px-4" v-if="book.materialBibliografico.descripcion">
           <b>Descripción</b><br />
-          {{ book.materialBibliografico.descripcion }}
+          {{ book.materialBibliografico.descripcion.substring(0, 200) + "..." }}
         </v-card-text>
         <v-card-text
           class="px-4"

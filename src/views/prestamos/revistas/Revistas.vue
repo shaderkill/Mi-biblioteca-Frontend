@@ -26,7 +26,7 @@
           lg="6"
           class="my-4"
         >
-          <vBooks :book.sync="revista" />
+          <vBooks :revista.sync="revista" />
         </v-col>
       </v-row>
     </div>
@@ -42,7 +42,7 @@
           lg="4"
           class="my-4"
         >
-          <vBooks :book.sync="revista" />
+          <vBooks :revista.sync="revista" />
         </v-col>
       </v-row>
     </div>
@@ -55,7 +55,7 @@ import revistaStore from "@/store/revistaStore";
 export default {
   name: "revistas",
   components: {
-    vBooks: () => import("@/components/shared/CardBook")
+    vBooks: () => import("@/components/shared/CardRevista.vue")
   },
   data: () => ({
     revistas: [],

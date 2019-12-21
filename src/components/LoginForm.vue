@@ -18,7 +18,7 @@
       <v-tab>Registrarse</v-tab>
     </v-tabs>
     <v-tabs-items v-model="tab">
-      <v-tab-item class="mx-4">
+      <v-tab-item class="mx-4" :value="0">
         <v-row justify="center" align="center">
           <v-col cols="12" sm="12">
             <v-card-title class="pt-8">
@@ -66,7 +66,7 @@
           </v-col>
         </v-row>
       </v-tab-item>
-      <v-tab-item>
+      <v-tab-item :value="1">
         <v-form lazy-validation>
           <v-stepper v-model="element" vertical class="elevation-0" non-linear>
             <v-stepper-step :complete="element > 1" step="1" editable
@@ -220,7 +220,8 @@ export default Vue.extend({
       }
     },
     bibliotecas: [],
-    tab: null,
+    buttonEnable: true,
+    tab: 0,
     emailRules: [
       v => !!v || "Debe ingresar su E-mail",
       v => /.+@.+\..+/.test(v) || "El E-mail ingresado no es valido"
@@ -282,8 +283,22 @@ export default Vue.extend({
               });
             }
             this.tab = 0;
-            this.registroSocio = null;
+            this.registroSocio = {
+              email: null,
+              password: null,
+              biblioteca: null,
+              imgAvatar:
+                "https://icon-library.net/images/avatar-icon-png/avatar-icon-png-9.jpg",
+              persona: {
+                id: null,
+                nombre: null,
+                apellidoPaterno: null,
+                apellidoMaterno: null,
+                rut: null
+              }
+            };
             this.fetchLogin = false;
+            this.socio = { email: null, password: null };
           }, 3000);
         } catch (e) {
           this.$toasted.error(
