@@ -129,7 +129,7 @@ export default {
       if (this.item) await this.materialBibliograficoCreate(this.item);
       setTimeout(() => {
         this.$router.go(-1);
-      }, 3000);
+      }, 1000);
     },
     async updateItem() {
       for (let key in this.item) {
@@ -141,7 +141,7 @@ export default {
       await this.materialBibliograficoUpdate(this.item);
       setTimeout(() => {
         this.$router.go(-1);
-      }, 3000);
+      }, 1000);
     },
     async updateIMG() {
       if (this.imgBiblio) {

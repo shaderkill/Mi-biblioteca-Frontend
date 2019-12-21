@@ -12,8 +12,6 @@ axios.create(config);
 
 axios.interceptors.request.use(
   function(config) {
-    // eslint-disable-next-line no-console
-    console.log(config);
     return config;
   },
   function(error) {
@@ -23,8 +21,6 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   function(response) {
-    // eslint-disable-next-line no-console
-    console.log(response);
     if (
       response.status === 201 ||
       (response.status === 200 && response.config.method === "delete")
@@ -36,8 +32,6 @@ axios.interceptors.response.use(
     return response;
   },
   function(error) {
-    // eslint-disable-next-line no-console
-    console.log(error.response);
     return Promise.reject(error);
   }
 );

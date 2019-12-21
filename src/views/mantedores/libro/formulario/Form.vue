@@ -118,7 +118,7 @@ export default {
       await this.libroCreate(this.item);
       setTimeout(() => {
         this.$router.go(-1);
-      }, 3000);
+      }, 1000);
     },
     async updateItem() {
       for (let key in this.item) {
@@ -130,7 +130,7 @@ export default {
       await this.libroUpdate(this.item);
       setTimeout(() => {
         this.$router.go(-1);
-      }, 3000);
+      }, 1000);
     }
   },
 

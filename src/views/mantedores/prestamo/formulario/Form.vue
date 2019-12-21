@@ -110,7 +110,7 @@ export default {
       await this.prestamoCreate(this.item);
       setTimeout(() => {
         this.$router.go(-1);
-      }, 3000);
+      }, 1000);
     },
     async updateItem() {
       for (let key in this.item) {
@@ -127,7 +127,7 @@ export default {
       await this.prestamoUpdate(this.item);
       setTimeout(() => {
         this.$router.go(-1);
-      }, 3000);
+      }, 1000);
     }
   },
 
