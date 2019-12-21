@@ -182,7 +182,7 @@
         <v-col cols="12" sm="12" md="6">
           <v-card class="pa-6" color="primary" dark>
             <v-card-title>
-              <v-chip color="info">Información</v-chip>
+              <v-chip color="grey darken-3">Información</v-chip>
             </v-card-title>
             <v-card-text>
               <v-row>
@@ -193,7 +193,7 @@
                   <v-card-text>
                     Solo debes acceder a tu cuenta de usuario y podras realizar
                     las consultas relacionadas a todos los prestamos que has
-                    solicitado hasta la fecha.
+                    solicitado hasta la fecha.<br /><br />
                   </v-card-text>
                 </v-col>
                 <v-col cols="12" sm="12" md="12" lg="12">
@@ -216,9 +216,9 @@
           </v-card>
         </v-col>
         <v-col cols="12" sm="12" md="6">
-          <v-card class="pa-6" color="error" dark>
+          <v-card class="pa-6" color="primary" dark>
             <v-card-title>
-              <v-chip color="warning">Información</v-chip>
+              <v-chip color="grey darken-3">Información</v-chip>
             </v-card-title>
             <v-card-text>
               <v-row>

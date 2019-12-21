@@ -1,5 +1,6 @@
 <template>
   <v-container fluid class="pb-12">
+    <v-card-title>Revistas</v-card-title>
     <v-text-field
       rounded
       filled

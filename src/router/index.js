@@ -19,6 +19,18 @@ const routes = [
           import(/* webpackChunkName: "home" */ "../views/Home.vue")
       },
       {
+        path: "/info",
+        name: "info",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "../views/Information.vue")
+      },
+      {
+        path: "/admin",
+        name: "admin",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "../views/Admin.vue")
+      },
+      {
         path: "/admin/biblioteca",
         component: () =>
           import(
@@ -152,6 +164,48 @@ const routes = [
           )
       },
       {
+        path: "/admin/multa",
+        component: () =>
+          import(
+            /* webpackChunkName: "mantenedor_multa" */ "../views/mantedores/multa/Multa.vue"
+          )
+      },
+      {
+        path: "/admin/multa/form/:id?",
+        component: () =>
+          import(
+            /* webpackChunkName: "mantenedor_multa" */ "../views/mantedores/multa/formulario/Form.vue"
+          )
+      },
+      {
+        path: "/admin/estadoprestamo",
+        component: () =>
+          import(
+            /* webpackChunkName: "mantenedor_estadoprestamo" */ "../views/mantedores/estadoprestamo/EstadoPrestamo.vue"
+          )
+      },
+      {
+        path: "/admin/estadoprestamo/form/:id?",
+        component: () =>
+          import(
+            /* webpackChunkName: "mantenedor_prestamo" */ "../views/mantedores/estadoprestamo/formulario/Form.vue"
+          )
+      },
+      {
+        path: "/admin/estadomulta",
+        component: () =>
+          import(
+            /* webpackChunkName: "mantenedor_estadomulta" */ "../views/mantedores/estadomulta/EstadoMulta.vue"
+          )
+      },
+      {
+        path: "/admin/estadomulta/form/:id?",
+        component: () =>
+          import(
+            /* webpackChunkName: "mantenedor_prestamo" */ "../views/mantedores/estadomulta/formulario/Form.vue"
+          )
+      },
+      {
         path: "/admin/socio",
         component: () =>
           import(
@@ -276,9 +330,37 @@ router.beforeEach((to, from, next) => {
     } else next("/login");
   }
 
+  function validateAdmin() {
+    store.dispatch("fetchLogin");
+    if (store.state.accessEmail && store.state.accessPassword) {
+      if (store.state.accessID) {
+        let email = localStorage.getItem("accessEmail");
+        if (email === "administrador@mibiblioteca.cl") next();
+        else next("/home");
+      } else next("/loading");
+    } else next("/login");
+  }
+
   if (to.fullPath === "/login") next();
   else if (to.fullPath === "/loading") next();
   else if (from.fullPath === "/loading" && to.fullPath === "/home") next();
+  else if (
+    to.fullPath === "/admin" ||
+    to.fullPath === "/admin/biblioteca" ||
+    to.fullPath === "/admin/categoria" ||
+    to.fullPath === "/admin/ciudad" ||
+    to.fullPath === "/admin/pais" ||
+    to.fullPath === "/admin/socio" ||
+    to.fullPath === "/admin/revista" ||
+    to.fullPath === "/admin/proyecto" ||
+    to.fullPath === "/admin/materialbibliografico" ||
+    to.fullPath === "/admin/libro" ||
+    to.fullPath === "/admin/prestamo" ||
+    to.fullPath === "/admin/estadoprestamo" ||
+    to.fullPath === "/admin/estadomulta" ||
+    to.fullPath === "/admin/multa"
+  )
+    validateAdmin();
   else validateUser();
 });
 

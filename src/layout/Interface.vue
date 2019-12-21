@@ -4,53 +4,24 @@
       color="primary darken-1"
       app
       shift
+      min-height="68"
+      grow
       class="d-sm-flex d-md-flex d-lg-none d-xl-none"
     >
-      <v-btn to="/home" class="mb-2">
-        <span>Inicio</span>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-
-      <v-btn to="/materiales/libros" class="mb-2">
-        <span>Libros</span>
-        <v-icon>mdi-book</v-icon>
-      </v-btn>
-
-      <v-btn to="/materiales/proyectos" class="mb-2">
-        <span>Proyectos</span>
-        <v-icon>mdi-book-information-variant</v-icon>
-      </v-btn>
-
-      <v-btn to="/materiales/revistas" class="mb-2">
-        <span>Revistas</span>
-        <v-icon>mdi-book-multiple</v-icon>
-      </v-btn>
-
-      <v-menu
-        top
-        left
-        content-class="overflow-y-auto mt-n12 back"
-        max-height="300"
+      <v-btn
+        :to="item.url"
+        v-for="(item, i) in listOptions"
+        :key="i"
+        height="100%"
       >
-        <template v-slot:activator="{ on }">
-          <v-btn v-on="on" class="mb-2">
-            <span>Admin</span>
-            <v-icon small>mdi-toolbox</v-icon>
-          </v-btn>
-        </template>
+        <span>{{ item.text }}</span>
+        <v-icon>{{ item.icon }}</v-icon>
+      </v-btn>
 
-        <v-list-item
-          v-for="(item, i) in linkAdmin"
-          :key="i"
-          :to="item.url"
-          class="back"
-        >
-          <v-list-item-title>{{ item.text }}</v-list-item-title>
-          <v-list-item-action>
-            <v-icon>mdi-table</v-icon>
-          </v-list-item-action>
-        </v-list-item>
-      </v-menu>
+      <v-btn to="/admin" v-if="isAdmin" height="100%">
+        <span>Admin</span>
+        <v-icon>mdi-toolbox</v-icon>
+      </v-btn>
     </v-bottom-navigation>
 
     <v-navigation-drawer
@@ -59,40 +30,25 @@
       color="back darken-1"
       class="elevation-4 d-sm-none d-md-none d-xl-flex d-lg-flex"
     >
-      <v-list dense>
-        <v-list-item link to="/home">
+      <v-list dense shaped>
+        <v-list-item
+          v-for="(item, i) in listOptions"
+          :key="i"
+          :to="item.url"
+          color="primary darken-2"
+        >
           <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
+            <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Inicio</v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>{{ item.text }}</v-list-item-title>
         </v-list-item>
-        <v-list-item link to="/materiales/libros">
-          <v-list-item-action>
-            <v-icon>mdi-book</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Libros</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link to="/materiales/proyectos">
-          <v-list-item-action>
-            <v-icon>mdi-book-information-variant</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Proyectos</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item link to="/materiales/revistas">
-          <v-list-item-action>
-            <v-icon>mdi-book-multiple</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Revistas</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-group prepend-icon="mdi-toolbox" no-action v-if="isAdmin">
+
+        <v-list-group
+          prepend-icon="mdi-toolbox"
+          no-action
+          v-if="isAdmin"
+          color="primary darken-2"
+        >
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title>Administración</v-list-item-title>
@@ -190,10 +146,11 @@
 
     <v-content>
       <transition
-        enter-active-class="animated fadeInRight abs delay-1s faster"
-        leave-active-class="animated fadeOutLeft abs faster"
+        mode="out-in"
+        enter-active-class="animated slideInLeft faster"
+        leave-active-class="animated slideOutLeft faster"
       >
-        <router-view></router-view>
+        <router-view />
       </transition>
     </v-content>
   </v-app>
@@ -219,6 +176,33 @@ export default {
     ],
     isAdmin: false,
     primaryColor: null,
+    listOptions: [
+      {
+        text: "Inicio",
+        url: "/home",
+        icon: "mdi-home"
+      },
+      {
+        text: "Libros",
+        url: "/materiales/libros",
+        icon: "mdi-book"
+      },
+      {
+        text: "Proyectos",
+        url: "/materiales/proyectos",
+        icon: "mdi-book-information-variant"
+      },
+      {
+        text: "Revistas",
+        url: "/materiales/revistas",
+        icon: "mdi-book-multiple"
+      },
+      {
+        text: "Información",
+        url: "/info",
+        icon: "mdi-information-variant"
+      }
+    ],
     linkAdmin: [
       {
         text: "Bibliotecas",
@@ -259,6 +243,18 @@ export default {
       {
         text: "Socios",
         url: "/admin/socio"
+      },
+      {
+        text: "Estado Multa",
+        url: "/admin/estadomulta"
+      },
+      {
+        text: "Estado Prestamo",
+        url: "/admin/estadoprestamo"
+      },
+      {
+        text: "Multa",
+        url: "/admin/multa"
       }
     ]
   }),
